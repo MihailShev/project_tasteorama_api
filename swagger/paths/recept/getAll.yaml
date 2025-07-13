@@ -1,0 +1,62 @@
+tags:
+  - Recipes
+summary: Get all the recipes
+operationId: getAllRecipes
+description: Returns a list of recipes with support for pagination and filtering.
+parameters:
+  - name: page
+    in: query
+    description: Page number (default is 1)
+    required: false
+    schema:
+      type: integer
+      minimum: 1
+  - name: perPage
+    in: query
+    description: Number of recipes per page (default is 12)
+    required: false
+    schema:
+      type: integer
+      minimum: 1
+      maximum: 100
+  - name: category
+    in: query
+    description: Recipe category
+    required: false
+    schema:
+      type: string
+  - name: ingredient
+    in: query
+    description: Ingredient ID (24-character hex string)
+    required: false
+    schema:
+      type: string
+      pattern: '^[a-fA-F0-9]{24}$'
+      example: 640c2dd963a319ea671e37aa
+  - name: title
+    in: query
+    description: Partial search by title
+    required: false
+    schema:
+      type: string
+security: []
+responses:
+  '200':
+    description: Successfully retrieved the list
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully found all recipes!
+            data:
+              $ref: ../../components/schemas/recipes/recipesWithParametrs.yaml
+  '401':
+    $ref: ../../components/responses/401.yaml
+  '500':
+    $ref: ../../components/responses/500.yaml

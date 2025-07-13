@@ -1,0 +1,24 @@
+type: object
+properties:
+  _id:
+    type: string
+    example: '640c2dd963a319ea671e37aa'
+  name:
+    type: string
+    example: 'Squid'
+  desc:
+    type: string
+    example: 'A type of cephalopod with a soft, cylindrical body and long tentacles.'
+  img:
+    type: string
+    example: 'https://ftp.goit.study/img/so-yummy/ingredients/640c2dd963a319ea671e37aa.jpg'
+  createdAt:
+    type: string
+    format: date-time
+    description: Ingredient created at
+    example: 2025-06-27T08:41:53.166Z
+  updatedAt:
+    type: string
+    format: date-time
+    description: Ingredient updated at
+    example: 2025-07-05T07:11:13.225Z

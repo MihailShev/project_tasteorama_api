@@ -1,0 +1,45 @@
+tags:
+  - Recipes
+
+summary: Remove a recipe from favorites (private)
+operationId: removeFavoriteRecipe
+description: Removes the specified recipe from the user's list of favorites.
+security:
+  - bearerAuth: []
+parameters:
+  - name: recipeId
+    in: path
+    required: true
+    description: ID of the recipe to be removed from favorites (24-character hex string)
+    schema:
+      type: string
+      pattern: '^[a-fA-F0-9]{24}$'
+      example: 665123abc321cc0011aa23ef
+responses:
+  '200':
+    description: Recipe successfully removed from favorites
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Recipe removed from favorites
+            data:
+              type: object
+              properties:
+                recipeId:
+                  type: string
+                  example: 665123abc321cc0011aa23ef
+  '401':
+    $ref: ../../components/responses/401.yaml
+  '404':
+    $ref: ../../components/responses/404.yaml
+  '409':
+    $ref: ../../components/responses/409.yaml
+  '500':
+    $ref: ../../components/responses/500.yaml

@@ -1,0 +1,73 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: API for working with the database for the Tasteorama website.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  description: This API was created by a student team to work with a NoSQL MongoDB database.
+tags:
+  - name: Auth
+    description: Auth operations.
+  - name: Categories
+    description: Categories operations.
+  - name: Users
+    description: Users operations.
+  - name: Recipes
+    description: Recipes operations.
+
+paths:
+  /api/auth/register:
+    post:
+      $ref: ../swagger/paths/auth/register/post.yaml
+  /api/auth/login:
+    post:
+      $ref: ../swagger/paths/auth/login/post.yaml
+  /api/auth/logout:
+    post:
+      $ref: ../swagger/paths/auth/logout/post.yaml
+  /api/auth/refresh:
+    post:
+      $ref: ../swagger/paths/auth/refresh/post.yaml
+  /api/ingredients:
+    get:
+      $ref: ../swagger/paths/ingredients/get.yaml
+  /api/categories/all:
+    get:
+      $ref: ../swagger/paths/categories/all/get.yaml
+  /api/users:
+    get:
+      $ref: ../swagger/paths/users/get.yaml
+    patch:
+      $ref: ../swagger/paths/users/patch.yaml
+  /api/recipes:
+    get:
+      $ref: ../swagger/paths/recept/getAll.yaml
+    post:
+      $ref: ../swagger/paths/recept/postCreate.yaml
+
+  /api/recipes/own:
+    get:
+      $ref: ../swagger/paths/recept/getOwn.yaml
+
+  /api/recipes/favorites:
+    get:
+      $ref: ../swagger/paths/recept/getAllFavorite.yaml
+
+  /api/recipes/favorites/{recipeId}:
+    post:
+      $ref: ../swagger/paths/recept/postFavoriteId.yaml
+    delete:
+      $ref: ../swagger/paths/recept/deleteFavorite.yaml
+
+  /api/recipes/{recipeId}:
+    get:
+      $ref: ../swagger/paths/recept/getId.yaml
+
+servers:
+  - url: https://recepy-api.onrender.com
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

@@ -1,0 +1,99 @@
+tags:
+  - Recipes
+summary: Create a new recipe (private)
+operationId: createRecipe
+description: Allows creating a recipe with a photo, description, ingredients, and category. Authorization is required.
+security:
+  - bearerAuth: []
+requestBody:
+  required: true
+  content:
+    multipart/form-data:
+      schema:
+        type: object
+        required:
+          - title
+          - category
+          - instructions
+          - description
+          - time
+          - ingredients
+        properties:
+          title:
+            type: string
+            maxLength: 64
+            example: Grilled Chicken with Lemon
+          category:
+            type: string
+            example: Chicken
+          area:
+            type: string
+            maxLength: 20
+            example: American
+          instructions:
+            type: string
+            maxLength: 1200
+            example: Season chicken, grill for 10 minutes per side.
+          description:
+            type: string
+            maxLength: 200
+            example: A delicious grilled chicken dish with lemon and herbs.
+          time:
+            type: integer
+            minimum: 1
+            maximum: 360
+            example: 45
+          cals:
+            type: integer
+            minimum: 1
+            maximum: 10000
+            example: 500
+          ingredients:
+            type: array
+            minItems: 2
+            maxItems: 16
+            items:
+              type: object
+              required:
+                - ingredient
+                - measure
+              properties:
+                ingredient:
+                  type: string
+                  pattern: "^[a-fA-F0-9]{24}$"
+                  example: 640c2dd963a319ea671e37aa
+                measure:
+                  type: string
+                  example: 150g
+            example:
+              - ingredient: '640c2dd963a319ea671e37aa'
+                measure: '150g'
+              - ingredient: '640c2dd963a319ea671e367e'
+                measure: '2 tbsp'
+          thumb:
+            type: string
+            format: binary
+responses:
+  '201':
+    description: Recipe successfully created
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: Successfully created a recipe!
+            data:
+              $ref: ../../components/schemas/recipes/recipes.yaml
+  '400':
+    $ref: ../../components/responses/400.yaml
+  '401':
+    $ref: ../../components/responses/401.yaml
+  '404':
+    $ref: ../../components/responses/404.yaml
+  '500':
+    $ref: ../../components/responses/500.yaml
