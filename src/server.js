@@ -25,7 +25,10 @@ export function setupServer() {
 
   app.use(
     cors({
-      origin: ['http://localhost:5173', 'https://tasteorama-recepy.vercel.app'],
+      origin: [
+        'http://localhost:5173',
+        'https://project-tasteorama.vercel.app',
+      ],
       credentials: true,
     }),
   );
