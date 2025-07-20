@@ -25,10 +25,7 @@ export function setupServer() {
 
   app.use(
     cors({
-      origin: [
-        'http://localhost:5173',
-        'https://project-tasteorama.vercel.app',
-      ],
+      origin: [getEnvVar('DEV_DOMAIN'), getEnvVar('PRODUCT_DOMAIN')],
       credentials: true,
     }),
   );
